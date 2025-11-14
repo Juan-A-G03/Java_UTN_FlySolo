@@ -1,0 +1,370 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========================================
+   THEME VARIABLES - REBEL (Electric Blue)
+   ======================================== */
+body.theme-rebel {
+    --primary-color: #0C85FA;
+    --primary-dark: #0A6FD1;
+    --secondary-color: #1E90FF;
+    --gradient-start: #0C85FA;
+    --gradient-end: #0A6FD1;
+    --accent-color: #00BFFF;
+    --text-light: #ffffff;
+}
+
+/* ========================================
+   THEME VARIABLES - IMPERIAL (Strong Red)
+   ======================================== */
+body.theme-imperial {
+    --primary-color: #F00000;
+    --primary-dark: #CC0000;
+    --secondary-color: #FF1A1A;
+    --gradient-start: #F00000;
+    --gradient-end: #CC0000;
+    --accent-color: #FF3333;
+    --text-light: #ffffff;
+}
+
+/* ========================================
+   THEME VARIABLES - NEUTRAL (Yellow)
+   ======================================== */
+body.theme-neutral {
+    --primary-color: #FFD700;
+    --primary-dark: #FFC107;
+    --secondary-color: #FFEB3B;
+    --gradient-start: #FFD700;
+    --gradient-end: #FFC107;
+    --accent-color: #FFEB3B;
+    --text-light: #212121;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #212121;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.5s ease;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    padding: 40px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+select, input[type="text"], input[type="datetime-local"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+select:focus, input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.switch-group {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 25px;
+}
+
+.switch-container {
+    flex: 1;
+}
+
+.switch-label {
+    display: block;
+    margin-bottom: 12px;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary-color);
+    transition: .4s;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 15px;
+}
+
+.slider span {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 32px;
+    width: 90px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+input:checked + .slider:before {
+    transform: translateX(96px);
+}
+
+.scheduled-date {
+    display: none;
+    margin-top: 15px;
+}
+
+.price-display {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+    text-align: center;
+}
+
+.price-display h2 {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price-display .price {
+    color: #fff;
+    font-size: 42px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.price-display .distance {
+    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-calculate {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-calculate:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-request {
+    background: #10b981;
+    color: white;
+}
+
+.btn-request:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-request:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.planet-info {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* ========================================
+   FACTION-SPECIFIC STYLING
+   ======================================== */
+
+/* Rebel Theme - Electric Blue, Heroic */
+body.theme-rebel h1 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(12, 133, 250, 0.5), 2px 2px 4px rgba(12, 133, 250, 0.3);
+}
+
+body.theme-rebel .price-display h2,
+body.theme-rebel .price-display .price,
+body.theme-rebel .price-display .distance {
+    text-shadow: 0 0 8px rgba(12, 133, 250, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.theme-rebel .container {
+    box-shadow: 0 10px 30px rgba(12, 133, 250, 0.4),
+                0 0 20px rgba(12, 133, 250, 0.2);
+}
+
+/* Imperial Theme - Strong Red, Authoritative */
+body.theme-imperial h1 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(240, 0, 0, 0.5), 2px 2px 6px rgba(240, 0, 0, 0.3);
+}
+
+body.theme-imperial .container {
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 10px 30px rgba(240, 0, 0, 0.5),
+                0 0 20px rgba(240, 0, 0, 0.3);
+}
+
+body.theme-imperial .alert-success {
+    background: #1e3a1e;
+    color: #8bc34a;
+    border: 1px solid #4caf50;
+}
+
+body.theme-imperial .alert-error {
+    background: #3a1e1e;
+    color: #ff5252;
+    border: 1px solid #f44336;
+}
+
+body.theme-imperial .price-display h2,
+body.theme-imperial .price-display .price,
+body.theme-imperial .price-display .distance {
+    text-shadow: 0 0 8px rgba(240, 0, 0, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Neutral Theme - Yellow/Gold, Professional */
+body.theme-neutral h1 {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 2px 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+body.theme-neutral .price-display .price,
+body.theme-neutral .price-display h2,
+body.theme-neutral .price-display .distance {
+    color: var(--text-light);
+}
+
+body.theme-neutral .subtitle {
+    color: #cccccc;
+}
+
+body.theme-neutral .container {
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4),
+                0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* Faction Badge */
+.faction-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+body.theme-rebel .faction-badge {
+    background: linear-gradient(135deg, #0C85FA, #0A6FD1);
+    color: white;
+    box-shadow: 0 0 10px rgba(12, 133, 250, 0.5);
+}
+
+body.theme-imperial .faction-badge {
+    background: linear-gradient(135deg, #F00000, #CC0000);
+    color: white;
+    border: 1px solid #FF3333;
+    box-shadow: 0 0 10px rgba(240, 0, 0, 0.5);
+}
+
+body.theme-neutral .faction-badge {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #212121;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}

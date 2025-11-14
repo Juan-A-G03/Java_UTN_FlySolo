@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlySolo - Login</title>
+    <link rel="stylesheet" href="../../css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>🚀 FlySolo</h1>
+            <p>Sistema de Transporte Espacial</p>
+        </div>
+
+        <!-- Error/Success messages will be shown here via URL params or session -->
+        <div id="messageContainer"></div>
+
+        <form action="login" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="usuario@ejemplo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-login">Iniciar Sesión</button>
+        </form>
+
+        <div class="divider">o</div>
+
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="register.html">Regístrate aquí</a>
+        </div>
+    </div>
+
+    <script>
+        // Show messages from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const success = urlParams.get('success');
+        const messageContainer = document.getElementById('messageContainer');
+
+        if (error) {
+            messageContainer.innerHTML = '<div class="alert alert-error">' + decodeURIComponent(error) + '</div>';
+        }
+        if (success) {
+            messageContainer.innerHTML = '<div class="alert alert-success">' + decodeURIComponent(success) + '</div>';
+        }
+    </script>
+</body>
+</html>
