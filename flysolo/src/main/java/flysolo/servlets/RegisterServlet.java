@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         // Show register form
-        request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/register.html").forward(request, response);
     }
 
     @Override
@@ -40,19 +40,25 @@ public class RegisterServlet extends HttpServlet {
         // Validate input
         if (name == null || name.trim().isEmpty()) {
             request.setAttribute("error", "Name is required");
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/register.html").forward(request, response);
             return;
         }
 
         if (email == null || email.trim().isEmpty()) {
             request.setAttribute("error", "Email is required");
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/register.html").forward(request, response);
             return;
         }
 
+        if (password == null || email.trim().isEmpty()) {
+            request.setAttribute("error", "Email is required");
+            request.getRequestDispatcher("/register.html").forward(request, response);
+            return;
+        }
+        
         if (faction == null || faction.trim().isEmpty()) {
             request.setAttribute("error", "Faction is required");
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/register.html").forward(request, response);
             return;
         }
 
@@ -62,24 +68,25 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("error", "Email already registered");
             request.setAttribute("name", name);
             request.setAttribute("email", email);
+            request.setAttribute("password", password);
             request.setAttribute("faction", faction);
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/register.html").forward(request, response);
             return;
         }
 
         // Register new passenger (default user type)
         // TODO: Add password hashing when you add password column
-        boolean registered = userController.registerPassenger(name, email, faction);
+        boolean registered = userController.registerPassenger(name, email, password, faction);
 
         if (registered) {
             request.setAttribute("success", "Registration successful! Please login.");
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.html").forward(request, response);
         } else {
             request.setAttribute("error", "Registration failed. Please try again.");
             request.setAttribute("name", name);
             request.setAttribute("email", email);
             request.setAttribute("faction", faction);
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/register.html").forward(request, response);
         }
     }
 }

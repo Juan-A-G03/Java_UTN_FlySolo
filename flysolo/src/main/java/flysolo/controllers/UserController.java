@@ -78,6 +78,10 @@ public class UserController {
             System.out.println("Error: Email is required");
             return false;
         }
+        if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            System.out.println("Error: Password is required");
+            return false;
+        }              
         if (user.getFaction() == null || user.getFaction().trim().isEmpty()) {
             System.out.println("Error: Faction is required");
             return false;
@@ -110,8 +114,8 @@ public class UserController {
     }
 
     // Register new passenger
-    public boolean registerPassenger(String name, String email, String faction) {
-        User user = new User(name, email, faction, "PASSENGER");
+    public boolean registerPassenger(String name, String email, String password, String faction) {
+        User user = new User(name, email, password, faction, "PASSENGER");
         return createUser(user);
     }
 

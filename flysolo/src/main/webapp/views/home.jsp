@@ -118,7 +118,7 @@
 
             <div class="scheduled-date" id="scheduledDateGroup">
                 <div class="form-group">
-                    <label for="scheduledDate">Scheduled Date & Time</label>
+                    <label for="scheduledDate">Scheduled Date and Time</label>
                     <input type="datetime-local" name="scheduledDate" id="scheduledDate">
                 </div>
             </div>

@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         // Show login form
-        request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.html").forward(request, response);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 
         if (email == null || email.trim().isEmpty()) {
             request.setAttribute("error", "Email is required");
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.html").forward(request, response);
             return;
         }
 
@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         
         if (password == null || email.trim().isEmpty()) {
             request.setAttribute("error", "Email is required");
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.html").forward(request, response);
             return;
         }
         
@@ -67,12 +67,12 @@ public class LoginServlet extends HttpServlet {
             } else if (user.isPilot()) {
                 response.sendRedirect("dashboard?view=pilot");
             } else {
-                response.sendRedirect("views/home.jsp");
+                response.sendRedirect("home");
             }
         } else {
             request.setAttribute("error", "Invalid email or password");
             request.setAttribute("email", email);
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.html").forward(request, response);
         }
     }
 }

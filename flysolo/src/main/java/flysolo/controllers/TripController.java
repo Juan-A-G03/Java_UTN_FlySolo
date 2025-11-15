@@ -17,7 +17,7 @@ public class TripController {
     private SolarSystemDAO solarSystemDAO;
     
     // Pricing constants
-    private static final double BASE_PRICE_PER_KM = 0.0001;  // Precio base por km
+    private static final double BASE_PRICE_PER_KM = 0.00001;  // Precio base por km
     private static final double UNDERCOVER_MULTIPLIER = 1.5;  // +50% para viajes encubiertos
     private static final double IMMEDIATE_MULTIPLIER = 1.2;   // +20% para viajes inmediatos
 
@@ -95,27 +95,42 @@ public class TripController {
 
     // Calculate trip price based on distance, mode, and type
     public BigDecimal calculatePrice(int originPlanetId, int destinationPlanetId, 
-                                      String tripMode, String tripType) {
-        double distance = calculateDistance(originPlanetId, destinationPlanetId);
-        
-        if (distance == 0) {
-            return BigDecimal.ZERO;
-        }
+            String tripMode, String tripType) {
 
-        // Base price
-        double basePrice = distance * BASE_PRICE_PER_KM;
+		Planet originPlanet = planetDAO.search(originPlanetId);
+		Planet destPlanet = planetDAO.search(destinationPlanetId);
+		
+		SolarSystem originSystem = solarSystemDAO.search(originPlanet.getSolarSystemId());
+		SolarSystem destSystem = solarSystemDAO.search(destPlanet.getSolarSystemId());
+		
+		// Calculamos la distancia (aunque quizás no se use si es interestelar)
+		double distance = calculateDistance(originPlanetId, destinationPlanetId);
+		
+		// Detectamos si están en distintos sistemas solares
+		boolean isInterstellar = originSystem.getId() != destSystem.getId();
+		
+		double basePrice;
+		
+		if (isInterstellar) {
+		// Precio fijo para salto interestelar
+		basePrice = 5000;  
+		} else {
+		// Precio basado en distancia dentro del mismo sistema
+		basePrice = distance * BASE_PRICE_PER_KM;
+		}
+		
+		// Aplicamos multipliers existentes
+		if ("UNDERCOVER".equals(tripMode)) {
+		basePrice *= UNDERCOVER_MULTIPLIER;
+		}
+		
+		if ("INMEDIATO".equals(tripType)) {
+		basePrice *= IMMEDIATE_MULTIPLIER;
+		}
+		
+		return new BigDecimal(basePrice).setScale(2, RoundingMode.HALF_UP);
+		}
 
-        // Apply multipliers
-        if ("UNDERCOVER".equals(tripMode)) {
-            basePrice *= UNDERCOVER_MULTIPLIER;
-        }
-
-        if ("INMEDIATO".equals(tripType)) {
-            basePrice *= IMMEDIATE_MULTIPLIER;
-        }
-
-        return new BigDecimal(basePrice).setScale(2, RoundingMode.HALF_UP);
-    }
 
     // Create new trip request
     public boolean createTripRequest(long passengerUserId, int originPlanetId, 

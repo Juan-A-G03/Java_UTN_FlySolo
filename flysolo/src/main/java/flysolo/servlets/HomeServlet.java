@@ -112,6 +112,19 @@ public class HomeServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Invalid planet selection");
             ArrayList<Planet> planets = planetDAO.list();
+
+	         // DEBUG: imprimir planetas en consola
+	         System.out.println("=== PLANETS FROM DAO ===");
+	         if (planets == null) {
+	             System.out.println("La lista de planetas es NULL");
+	         } else if (planets.isEmpty()) {
+	             System.out.println("La lista de planetas está vacía");
+	         } else {
+	             for (Planet p : planets) {
+	                 System.out.println("Planet: id=" + p.getId() + ", name=" + p.getName());
+	             }
+	         }
+
             request.setAttribute("planets", planets);
             request.getRequestDispatcher("/views/home.jsp").forward(request, response);
         }

@@ -21,9 +21,10 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, String faction, String userType) {
+    public User(String name, String email, String password, String faction, String userType) {
         this.name = name;
         this.email = email;
+        this.password = password;
         this.faction = faction;
         this.userType = userType;
     }

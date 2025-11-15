@@ -45,7 +45,7 @@ body.theme-neutral {
 
 body {
     font-family: 'Arial', sans-serif;
-    background: #212121;
+    background: #333333;
     min-height: 100vh;
     padding: 20px;
     transition: background 0.5s ease;
@@ -54,7 +54,7 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background: white;
+    background: 1A1A1A;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     padding: 40px;

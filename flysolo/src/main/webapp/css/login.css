@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: #212121;
+    background: #333333;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -44,7 +44,7 @@ body::after {
 .container {
     position: relative;
     z-index: 1;
-    background: white;
+    background: 1A1A1A;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     padding: 40px;

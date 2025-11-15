@@ -27,6 +27,7 @@ public class UserDAO {
                 u.setId(rs.getLong("id"));
                 u.setName(rs.getString("name"));
                 u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password"));
                 u.setFaction(rs.getString("faction"));
                 u.setUserType(rs.getString("user_type"));
                 u.setLicenseNumber(rs.getString("license_number"));
@@ -66,6 +67,7 @@ public class UserDAO {
                 user.setId(rs.getLong("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
                 user.setFaction(rs.getString("faction"));
                 user.setUserType(rs.getString("user_type"));
                 user.setLicenseNumber(rs.getString("license_number"));
@@ -104,6 +106,7 @@ public class UserDAO {
                 user.setId(rs.getLong("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
                 user.setFaction(rs.getString("faction"));
                 user.setUserType(rs.getString("user_type"));
                 user.setLicenseNumber(rs.getString("license_number"));
@@ -204,7 +207,7 @@ public class UserDAO {
     
     //insert a user in the DB
     public boolean insert(User u) {
-        String sql = "INSERT INTO users (name, email, faction, user_type, license_number, pilot_status, rating_avg) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, email, password, faction, user_type, license_number, pilot_status, rating_avg) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         boolean inserted = false;
 
         Connection conn = null;
@@ -216,11 +219,12 @@ public class UserDAO {
             stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getEmail());
-            stmt.setString(3, u.getFaction());
-            stmt.setString(4, u.getUserType());
-            stmt.setString(5, u.getLicenseNumber());
-            stmt.setString(6, u.getPilotStatus());
-            stmt.setBigDecimal(7, u.getRatingAvg());
+            stmt.setString(3, u.getPassword());
+            stmt.setString(4, u.getFaction());
+            stmt.setString(5, u.getUserType());
+            stmt.setString(6, u.getLicenseNumber());
+            stmt.setString(7, u.getPilotStatus());
+            stmt.setBigDecimal(8, u.getRatingAvg());
 
             int rows = stmt.executeUpdate();
             if (rows > 0) {
@@ -242,7 +246,7 @@ public class UserDAO {
     
     //update a User by ID
     public boolean update(User u) {
-        String sql = "UPDATE users SET name = ?, email = ?, faction = ?, user_type = ?, license_number = ?, pilot_status = ?, rating_avg = ? WHERE id = ?";
+        String sql = "UPDATE users SET name = ?, email = ?, password = ?, faction = ?, user_type = ?, license_number = ?, pilot_status = ?, rating_avg = ? WHERE id = ?";
         boolean updated = false;
 
         Connection conn = null;
@@ -253,12 +257,13 @@ public class UserDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getEmail());
-            stmt.setString(3, u.getFaction());
-            stmt.setString(4, u.getUserType());
-            stmt.setString(5, u.getLicenseNumber());
-            stmt.setString(6, u.getPilotStatus());
-            stmt.setBigDecimal(7, u.getRatingAvg());
-            stmt.setLong(8, u.getId());
+            stmt.setString(3, u.getPassword());
+            stmt.setString(4, u.getFaction());
+            stmt.setString(5, u.getUserType());
+            stmt.setString(6, u.getLicenseNumber());
+            stmt.setString(7, u.getPilotStatus());
+            stmt.setBigDecimal(8, u.getRatingAvg());
+            stmt.setLong(9, u.getId());
 
             updated = stmt.executeUpdate() > 0;
 
