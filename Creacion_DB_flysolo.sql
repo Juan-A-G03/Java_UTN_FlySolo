@@ -3,22 +3,22 @@
 -- Versión: v1.3
 -- =========================================================
 -- Características del diseño:
---  * Tabla única users con user_type (PASSENGER | PILOT | ADMIN)
---  * Flujo: PASSENGER solicita ser piloto => license_number + pilot_status=PENDIENTE
+--  Tabla única users con user_type (PASSENGER | PILOT | ADMIN)
+--  Flujo: PASSENGER solicita ser piloto => license_number + pilot_status=PENDIENTE
 --           ADMIN aprueba => user_type=PILOT, pilot_status=APROBADO
---  * Histórico de estados del piloto en pilot_status_history
---  * Naves sin columna pilot_id; relación N..M histórica pilot_ship_assignments
+--  Histórico de estados del piloto en pilot_status_history
+--  Naves sin columna pilot_id; relación N..M histórica pilot_ship_assignments
 --    (PK compuesta: ship_id + pilot_user_id + assigned_at)
---  * Coordenadas espaciales:
+--  Coordenadas espaciales:
 --        - Sistemas solares: system_x_u12, system_y_u12, system_z_u12 en unidades de 10^12 km
 --        - Planetas (offset dentro del sistema): planet_x_u6, planet_y_u6, planet_z_u6 en unidades de 10^6 km
 --        - Posición absoluta planeta (en km) = (system_*_u12 * 1e12) + (planet_*_u6 * 1e6)
---  * Trips sin estado EXPIRADO (usar CANCELADO con cancel_reason='EXPIRADO' si se requiere)
---  * Trips con modo (trip_mode): NORMAL | UNDERCOVER
+--  Trips sin estado EXPIRADO (usar CANCELADO con cancel_reason='EXPIRADO' si se requiere)
+--  Trips con modo (trip_mode): NORMAL | UNDERCOVER
 --      - NORMAL: reglas de compatibilidad con NEUTRAL como puente
 --      - UNDERCOVER: solo REBEL/IMPERIAL, misma facción, NEUTRAL no participa
---  * Payments sin currency/updated_at (métodos válidos: TRANSFERENCIA | CREDITO, validar en Java)
---  * Todas las validaciones de dominio y transiciones de estado se realizan en Java (sin CHECK/ENUM).
+--  Payments sin currency/updated_at (métodos válidos: TRANSFERENCIA | CREDITO, validar en Java)
+--  Todas las validaciones de dominio y transiciones de estado se realizan en Java (sin CHECK/ENUM).
 -- =========================================================
 
 DROP DATABASE IF EXISTS flysolo;
@@ -39,7 +39,7 @@ CREATE TABLE users (
   user_type VARCHAR(15) NOT NULL,          -- PASSENGER | PILOT | ADMIN
   license_number VARCHAR(64) NULL,         -- se completa al solicitar ser piloto
   pilot_status VARCHAR(20) NULL,           -- NULL | PENDIENTE | APROBADO | RECHAZADO
-  rating_avg DECIMAL(3,2) NULL,            -- rating histórico (lógica de reseñas fuera de alcance por ahora)
+  rating_avg DECIMAL(3,2) NULL,            -- rating histórico (logica de resenias fuera de alcance por ahora)
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY idx_users_type (user_type),
@@ -48,7 +48,7 @@ CREATE TABLE users (
 ) ENGINE=InnoDB;
 
 -- =========================================================
--- Histórico de estados de piloto
+-- Historico de estados de piloto
 -- =========================================================
 CREATE TABLE pilot_status_history (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -118,7 +118,7 @@ CREATE TABLE ships (
 CREATE TABLE pilot_ship_assignments (
   ship_id BIGINT UNSIGNED NOT NULL,
   pilot_user_id BIGINT UNSIGNED NOT NULL,
-  assigned_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), -- mayor resolución
+  assigned_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), -- mayor resolucion
   unassigned_at DATETIME(6) NULL,
   assigned_by_admin_user_id BIGINT UNSIGNED NULL,
   PRIMARY KEY (ship_id, pilot_user_id, assigned_at),
