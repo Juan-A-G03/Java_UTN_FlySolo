@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlySolo - Registro</title>
+	<link rel="stylesheet" href="/flysolo/css/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>🚀 FlySolo</h1>
+            <p>Únete al Sistema de Transporte Espacial</p>
+        </div>
+
+        <!-- Error messages will be shown here -->
+        <div id="messageContainer"></div>
+
+        <form action="register" method="post">
+            <div class="form-group">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" name="name" placeholder="Ej: Luke Skywalker" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="usuario@ejemplo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                <p class="help-text">Usa al menos 6 caracteres</p>
+            </div>
+
+            <div class="form-group">
+                <label for="faction">Facción</label>
+                <select id="faction" name="faction" required>
+                    <option value="">-- Selecciona tu facción --</option>
+                    <option value="REBEL">Alianza Rebelde (Rebel Alliance)</option>
+                    <option value="IMPERIAL">Imperio Galáctico (Galactic Empire)</option>
+                    <option value="NEUTRAL">Neutral / Independiente</option>
+                </select>
+                <div class="faction-info">
+                    <div class="faction-badge rebel">
+                        <strong>REBELDES</strong><br>
+                        
+                    </div>
+                    <div class="faction-badge imperial">
+                        <strong>IMPERIO</strong><br>
+                        
+                    </div>
+                    <div class="faction-badge neutral">
+                        <strong>NEUTRALES</strong><br>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-register">Crear Cuenta</button>
+        </form>
+
+        <div class="divider">o</div>
+
+        <div class="login-link">
+            ¿Ya tienes cuenta? <a href="login.html">Inicia sesión aquí</a>
+        </div>
+    </div>
+
+    <script>
+        // Show messages from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const messageContainer = document.getElementById('messageContainer');
+
+        if (error) {
+            messageContainer.innerHTML = '<div class="alert alert-error">' + decodeURIComponent(error) + '</div>';
+        }
+
+        // Highlight selected faction
+        const factionSelect = document.getElementById('faction');
+        const factionBadges = document.querySelectorAll('.faction-badge');
+
+        factionSelect.addEventListener('change', function() {
+            factionBadges.forEach(badge => {
+                badge.style.border = '2px solid transparent';
+            });
+
+            if (this.value === 'REBEL') {
+                factionBadges[0].style.border = '2px solid #0C85FA';
+            } else if (this.value === 'IMPERIAL') {
+                factionBadges[1].style.border = '2px solid #F00000';
+            } else if (this.value === 'NEUTRAL') {
+                factionBadges[2].style.border = '2px solid #FFD700';
+            }
+        });
+    </script>
+</body>
+</html>
