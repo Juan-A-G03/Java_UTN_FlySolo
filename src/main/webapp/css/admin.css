@@ -1,0 +1,152 @@
+/* Admin styles scoped to .admin-page to avoid affecting other pages */
+.admin-page * { box-sizing: border-box; }
+
+.admin-page body {
+    font-family: 'Arial', sans-serif;
+    background: #333333; /* same background as main pages */
+    color: #212121;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s ease;
+}
+
+/* Ensure pages with body.admin-page have a solid background so nothing shows behind */
+body.admin-page {
+    background: #333333 !important;
+    min-height: 100vh;
+}
+
+.admin-page .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #1A1A1A; /* consistent with home container */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    padding: 32px;
+    position: relative;
+    z-index: 10;
+    background: #1A1A1A; /* solid background */
+}
+
+/* Top navigation (kept subtle and consistent) */
+.admin-page .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.admin-page .top-nav a {
+    color: var(--primary-color, #0C85FA);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 12px;
+}
+
+/* Admin navigation mirrors simple link style used elsewhere */
+.admin-page .admin-nav {
+    margin-bottom: 22px;
+}
+.admin-page .admin-nav a {
+    color: #999999;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.admin-page .admin-nav a:hover {
+    background: rgba(255,255,255,0.03);
+    color: var(--primary-color, #0C85FA);
+}
+
+/* Cards to show overview actions (styled simply) */
+.admin-page .admin-cards {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+}
+.admin-page .card {
+    flex: 1;
+    /* Increase opacity so text is clearly readable and not see-through */
+    background: rgba(255,255,255,0.06);
+    padding: 22px;
+    border-radius: 12px;
+    margin-bottom: 12px; /* give vertical breathing room */
+    color: #e6eef8; /* ensure high contrast text */
+}
+.admin-page .card h3 {
+    margin-top: 0;
+    color: var(--primary-color, #0C85FA);
+    margin-bottom: 8px;
+}
+.admin-page .card p {
+    color: rgba(230,238,248,0.95);
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* Buttons: reuse the same visual language as homeUser buttons */
+.admin-page .btn {
+    display: inline-block;
+    background: var(--primary-color, #0C85FA);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+.admin-page .btn:hover { background: var(--primary-dark, #0A6FD1); transform: translateY(-2px); }
+
+/* Table styling tuned to match app */
+.admin-page .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+.admin-page .user-table th, .admin-page .user-table td {
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    padding: 10px 8px;
+    text-align: left;
+    color: #d1d5db;
+}
+.admin-page .user-table thead th {
+    background: rgba(255,255,255,0.01);
+    font-weight: 700;
+    color: #fff;
+}
+.admin-page .user-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+/* Action buttons inside tables */
+.admin-page .btn-action {
+    background: var(--primary-color, #0C85FA);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+}
+.admin-page .btn-action.delete { background: #ef4444; }
+.admin-page .btn-action:hover { opacity: 0.95; }
+
+/* Alerts: reuse the app's alert colors */
+.admin-page .alert { padding: 12px; border-radius: 8px; margin-bottom: 16px; }
+.admin-page .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.admin-page .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+/* Small helpers */
+.admin-page .form-inline { display: inline-block; margin: 0 6px; }
+
+@media (max-width: 720px) {
+    .admin-page .admin-cards { flex-direction: column; }
+    .admin-page .container { padding: 16px; }
+    .admin-page .user-table th, .admin-page .user-table td { font-size: 13px; }
+}
+
+/* Increase gap between cards on larger screens */
+@media (min-width: 720px) {
+    .admin-page .admin-cards { gap: 22px; }
+}
+
+/* End of admin styles */

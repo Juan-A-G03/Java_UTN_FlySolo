@@ -1,0 +1,189 @@
+/* ========================================
+   ADVANCED FACTION THEMES
+   Star Wars Inspired Visual Effects
+   ======================================== */
+
+/* ========================================
+   REBEL ALLIANCE - Electric Blue
+   ======================================== */
+body.theme-rebel .btn-calculate,
+body.theme-rebel .btn-request {
+    position: relative;
+    overflow: hidden;
+}
+
+body.theme-rebel .btn-calculate::before,
+body.theme-rebel .btn-request::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+body.theme-rebel .btn-calculate:hover::before,
+body.theme-rebel .btn-request:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+body.theme-rebel .btn-request {
+    background: linear-gradient(135deg, #0C85FA, #0A6FD1);
+    box-shadow: 0 0 15px rgba(12, 133, 250, 0.3);
+}
+
+body.theme-rebel .btn-request:hover {
+    box-shadow: 0 0 25px rgba(12, 133, 250, 0.6);
+}
+
+/* ========================================
+   GALACTIC EMPIRE - Strong Red
+   ======================================== */
+body.theme-imperial {
+    position: relative;
+}
+
+body.theme-imperial::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(240, 0, 0, 0.03) 2px,
+            rgba(240, 0, 0, 0.03) 4px
+        );
+    pointer-events: none;
+    z-index: 1;
+}
+
+body.theme-imperial .container {
+    position: relative;
+    z-index: 2;
+    border: 3px solid rgba(240, 0, 0, 0.5);
+}
+
+body.theme-imperial h1 {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+body.theme-imperial .btn-calculate,
+body.theme-imperial .btn-request {
+    border: 2px solid rgba(240, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+body.theme-imperial .btn-request {
+    background: linear-gradient(135deg, #F00000, #CC0000);
+    border-color: #FF3333;
+    box-shadow: 0 0 20px rgba(240, 0, 0, 0.3);
+}
+
+body.theme-imperial .btn-request:hover {
+    box-shadow: 0 0 30px rgba(240, 0, 0, 0.6);
+}
+
+/* ========================================
+   NEUTRAL - Yellow/Gold
+   ======================================== */
+body.theme-neutral .container {
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+body.theme-neutral .faction-badge {
+    animation: badge-glow 2s ease-in-out infinite;
+}
+
+@keyframes badge-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+}
+
+body.theme-neutral h1 {
+    background: linear-gradient(90deg, #FFD700, #FFC107, #FFD700);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-text 3s linear infinite;
+}
+
+@keyframes gradient-text {
+    to { background-position: 200% center; }
+}
+
+body.theme-neutral .btn-request {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #212121;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+body.theme-neutral .btn-request:hover {
+    background: linear-gradient(135deg, #FFC107, #FF9800);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+/* ========================================
+   COMMON ENHANCEMENTS
+   ======================================== */
+
+.switch {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.price-display {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: price-appear 0.5s ease-out;
+}
+
+@keyframes price-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Starfield effect for all themes */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, white, transparent);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+    animation: stars-float 60s linear infinite;
+}
+
+@keyframes stars-float {
+    from { background-position: 0% 0%; }
+    to { background-position: 100% 100%; }
+}
