@@ -41,6 +41,22 @@ body.theme-rebel .btn-request:hover {
     box-shadow: 0 0 25px rgba(12, 133, 250, 0.6);
 }
 
+/* Trip accept button styles per-faction (pilot accept button inside trip-card) */
+/* Rebel: electric blue primary */
+body.theme-rebel .trip-card form button,
+body.theme-rebel .trip-card button.accept {
+    background: linear-gradient(135deg, #0C85FA, #0A6FD1);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 6px 18px rgba(12,133,250,0.25);
+}
+body.theme-rebel .trip-card form button:hover,
+body.theme-rebel .trip-card button.accept:hover {
+    background: linear-gradient(135deg, #0A6FD1, #075ec0);
+    box-shadow: 0 10px 26px rgba(12,133,250,0.36);
+    transform: translateY(-2px);
+}
+
 /* ========================================
    GALACTIC EMPIRE - Strong Red
    ======================================== */
@@ -96,6 +112,22 @@ body.theme-imperial .btn-request:hover {
     box-shadow: 0 0 30px rgba(240, 0, 0, 0.6);
 }
 
+/* Trip accept button styles per-faction (pilot accept button inside trip-card) */
+/* Imperial: strong red primary */
+body.theme-imperial .trip-card form button,
+body.theme-imperial .trip-card button.accept {
+    background: linear-gradient(135deg, #F54343, #CC0000);
+    color: #fff;
+    border: 1px solid rgba(255,200,200,0.06);
+    box-shadow: 0 6px 18px rgba(240,0,0,0.22);
+}
+body.theme-imperial .trip-card form button:hover,
+body.theme-imperial .trip-card button.accept:hover {
+    background: linear-gradient(135deg, #CC0000, #A30000);
+    box-shadow: 0 10px 26px rgba(240,0,0,0.36);
+    transform: translateY(-2px);
+}
+
 /* ========================================
    NEUTRAL - Yellow/Gold
    ======================================== */
@@ -134,6 +166,22 @@ body.theme-neutral .btn-request {
 body.theme-neutral .btn-request:hover {
     background: linear-gradient(135deg, #FFC107, #FF9800);
     box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+/* Trip accept button styles per-faction (pilot accept button inside trip-card) */
+/* Neutral: gold/yellow primary */
+body.theme-neutral .trip-card form button,
+body.theme-neutral .trip-card button.accept {
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    color: #212121;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 6px 18px rgba(255,215,0,0.16);
+}
+body.theme-neutral .trip-card form button:hover,
+body.theme-neutral .trip-card button.accept:hover {
+    background: linear-gradient(135deg, #FFC107, #FFB300);
+    box-shadow: 0 10px 26px rgba(255,215,0,0.28);
+    transform: translateY(-2px);
 }
 
 /* ========================================
@@ -186,4 +234,11 @@ body::after {
 @keyframes stars-float {
     from { background-position: 0% 0%; }
     to { background-position: 100% 100%; }
+}
+
+/* Fallback: in case no theme applied, keep accent color */
+.trip-card form button,
+.trip-card button.accept {
+    background: var(--primary-color, #0C85FA);
+    color: var(--text-light, #fff);
 }

@@ -54,7 +54,7 @@ public class TripController {
 
     // Get pending trips (for pilots to accept)
     public ArrayList<Trip> getPendingTrips() {
-        return tripDAO.listByStatus("PENDIENTE");
+        return tripDAO.listPendingUnassigned();
     }
 
     // Calculate distance between two planets in kilometers

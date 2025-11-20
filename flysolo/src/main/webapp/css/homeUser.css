@@ -368,3 +368,119 @@ body.theme-neutral .faction-badge {
     color: #212121;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
+
+/* Trip cards styling: boxed cards with subtle separation for pilot view */
+.trips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* space between cards */
+    margin-top: 20px;
+}
+
+.trip-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.trip-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: var(--text-light, #fff);
+}
+
+.trip-card p {
+    color: rgba(255,255,255,0.85);
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.trip-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between; /* separa acciones principales y cancelar */
+}
+
+.left-actions, .right-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Estilo del formulario de cancelar para que el input y el botón estén alineados */
+.cancel-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.cancel-input {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(0,0,0,0.15);
+    color: var(--text-light, #fff);
+    min-width: 220px;
+}
+
+/* Botones específicos para acciones: usar variables de facción para colores coherentes */
+.btn-start {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-light);
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.45); }
+
+.btn-complete {
+    background: rgba(0,0,0,0.65); /* neutral dark to indicate completion */
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-complete:hover { background: rgba(0,0,0,0.75); transform: translateY(-2px); }
+
+/* Cancelar: usar una variante de color que contraste con la facción pero mantenga la identidad
+   Por ejemplo: en REBEL usar un rojo suave; en IMPERIAL usar un oscuro; en NEUTRAL usar gris rojizo. */
+.btn-cancel {
+    background: rgba(255, 69, 58, 0.95); /* default rojo vibrante para llamar la atención */
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Ajustes por facción para que el botón de cancelar tenga un tono coherente con la facción */
+body.theme-rebel .btn-cancel {
+    background: linear-gradient(135deg, #FF6B6B, #FF4D4D);
+}
+
+body.theme-imperial .btn-cancel {
+    background: linear-gradient(135deg, #8B0000, #B22222);
+}
+
+body.theme-neutral .btn-cancel {
+    background: linear-gradient(135deg, #D97706, #C2410C); /* naranja/ámbar */
+}
+
+/* Tamaños responsivos */
+@media (max-width: 600px) {
+    .trip-actions { flex-direction: column; align-items: stretch; }
+    .cancel-input { width: 100%; }
+    .left-actions, .right-actions { justify-content: center; }
+}

@@ -54,18 +54,19 @@ public class LoginServlet extends HttpServlet {
         User user = userController.getUserByEmail(email);
 
         if (user != null) {
-            // Create session
+            // Crear sesion y almacenar atributos del usuario
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("userId", user.getId());
             session.setAttribute("userType", user.getUserType());
             session.setAttribute("userFaction", user.getFaction());
 
-            // Redirect based on user type
+            // Dirigir al dashboard correspondiente segun el tipo de usuario
             if (user.isAdmin()) {
                 response.sendRedirect("dashboard?view=admin");
             } else if (user.isPilot()) {
-                response.sendRedirect("dashboard?view=pilot");
+                // Dirigir al panel del piloto
+                response.sendRedirect("myTrips");
             } else {
                 response.sendRedirect("home");
             }

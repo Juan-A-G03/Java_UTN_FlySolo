@@ -223,6 +223,49 @@ public class TripDAO {
         return trips;
     }
     
+    // list only PENDIENTE trips that have no pilot assigned (defensive)
+    public ArrayList<Trip> listPendingUnassigned() {
+        ArrayList<Trip> trips = new ArrayList<>();
+        String sql = "SELECT t.*, " +
+                     "passenger.name as passenger_name, " +
+                     "pilot.name as pilot_name, " +
+                     "op.name as origin_planet_name, " +
+                     "dp.name as destination_planet_name, " +
+                     "os.name as origin_solar_system_name, " +
+                     "ds.name as destination_solar_system_name " +
+                     "FROM trips t " +
+                     "INNER JOIN users passenger ON t.passenger_user_id = passenger.id " +
+                     "LEFT JOIN users pilot ON t.pilot_user_id = pilot.id " +
+                     "INNER JOIN planets op ON t.origin_planet_id = op.id " +
+                     "INNER JOIN planets dp ON t.destination_planet_id = dp.id " +
+                     "INNER JOIN solar_systems os ON op.solar_system_id = os.id " +
+                     "INNER JOIN solar_systems ds ON dp.solar_system_id = ds.id " +
+                     "WHERE t.status = 'PENDIENTE' AND t.pilot_user_id IS NULL " +
+                     "ORDER BY t.requested_at DESC";
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtil.getConnection();
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Trip t = mapResultSetToTrip(rs);
+                trips.add(t);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(conn, stmt, rs);
+        }
+
+        return trips;
+    }
+    
     //insert a trip in the DB
     public boolean insert(Trip t) {
         String sql = "INSERT INTO trips (passenger_user_id, pilot_user_id, origin_planet_id, destination_planet_id, trip_mode, type, status, price, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

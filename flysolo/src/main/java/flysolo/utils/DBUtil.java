@@ -11,7 +11,7 @@ public class DBUtil {
     
     private static final String URL = "jdbc:mysql://localhost:3306/flysolo";
     private static final String USER = "root";
-    private static final String PASSWORD = "root";
+    private static final String PASSWORD = "gina2610";
     
     // Cargar driver una vez
     static {
